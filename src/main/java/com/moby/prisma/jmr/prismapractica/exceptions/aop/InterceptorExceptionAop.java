@@ -1,4 +1,4 @@
-package com.moby.prisma.jmr.prismapractica.aop;
+package com.moby.prisma.jmr.prismapractica.exceptions.aop;
 
 import com.moby.prisma.jmr.prismapractica.exceptions.GlobalServiceDataAccessException;
 import org.aspectj.lang.annotation.AfterThrowing;
