@@ -23,10 +23,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(GlobalServiceDataAccessException.class)
     public ResponseEntity<ResponseMessage> handlerGlobalServiceDataAccessException(GlobalServiceDataAccessException globalServiceDataAccessException) {
         return ResponseEntity
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .status(HttpStatus.BAD_REQUEST)
                 .body(ResponseMessage.builder()
                         .message(globalServiceDataAccessException.getMessage()).build());
     }
-
-
 }
