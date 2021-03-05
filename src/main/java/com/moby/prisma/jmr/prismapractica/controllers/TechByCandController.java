@@ -38,10 +38,10 @@ public class TechByCandController
         return techByCandService.getTechnologiesByCandidate(id);
     }
 
-/*    @GetMapping("/all/{tech}")
+    @GetMapping("/all/{tech}")
     public List<TechnologiesByCandidate> getAllByTech(@PathVariable(name = "tech") String name)
     {
         return techByCandService.getTechnologiesByTechnology_NameIsLike(name);
-    }*/
+    }
 
 }

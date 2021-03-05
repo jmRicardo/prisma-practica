@@ -12,4 +12,6 @@ public interface TechByCandRepository extends JpaRepository<TechnologiesByCandid
     List<TechnologiesByCandidate> getTechnologiesByCandidate_IdAndTechnology_Name(long id, String name);
 
     List<TechnologiesByCandidate> getTechnologiesByCandidate_Id(long id);
+
+    List<TechnologiesByCandidate> getTechnologiesByTechnology_Name(String name);
 }

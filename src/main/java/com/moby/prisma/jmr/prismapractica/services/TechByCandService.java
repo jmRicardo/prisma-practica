@@ -27,4 +27,8 @@ public class TechByCandService {
     public List<TechnologiesByCandidate> getTechnologiesByCandidate(long id) {
         return techByCandRepository.getTechnologiesByCandidate_Id(id);
     }
+
+    public List<TechnologiesByCandidate> getTechnologiesByTechnology_NameIsLike(String name) {
+        return techByCandRepository.getTechnologiesByTechnology_Name(name);
+    }
 }

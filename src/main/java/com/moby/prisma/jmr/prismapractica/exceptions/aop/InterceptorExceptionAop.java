@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class InterceptorExceptionAop {
 
-    private static final String MSJ_DATA_ACCESS_EXCEPTION = "Interceptador de servicios general en caso de problemas en la BD";
+    private static final String MSJ_DATA_ACCESS_EXCEPTION = "Interceptador de servicios general. En caso de problema de integridad referncial en la BD";
 
     @AfterThrowing(pointcut = "within(com.moby.prisma.jmr.prismapractica.services.*)", throwing = "ex")
     public void handleDataAccessException(DataAccessException ex) throws GlobalServiceDataAccessException {
