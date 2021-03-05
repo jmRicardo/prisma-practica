@@ -26,6 +26,7 @@ public class Candidate {
 
     private String document;
 
+    @Column(name = "date_of_birth")
     private Date dateOfBirth;
 
 
