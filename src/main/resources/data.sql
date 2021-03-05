@@ -1,0 +1,1 @@
+INSERT INTO TECHNOLOGIES(name, version) VALUES ('Java','15')

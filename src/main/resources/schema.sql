@@ -1,11 +1,11 @@
 CREATE TABLE candidates (
-                              candidate_id int NOT NULL AUTO_INCREMENT,
+                              id_candidate int NOT NULL AUTO_INCREMENT,
                               first_name varchar(45) NOT NULL,
                               last_name varchar(45) NOT NULL,
                               type varchar(10) NOT NULL,
                               document varchar(20) NOT NULL,
                               date_of_birth date NOT NULL,
-                              PRIMARY KEY (candidate_id),
+                              PRIMARY KEY (id_candidate),
                               UNIQUE (document)
 );
 
