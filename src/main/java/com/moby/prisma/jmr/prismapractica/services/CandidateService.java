@@ -34,7 +34,7 @@ public class CandidateService {
         throw new CandidateNotExistsException("el candidato no se encuentra en la BD");
     }
 
-    public Candidate update(Candidate candidate,long id)
+    public void update(Candidate candidate,long id)
     {
         Optional<Candidate> byId = candidateRepository.findById(id);
         if (byId.isPresent())
@@ -42,8 +42,10 @@ public class CandidateService {
             candidate.setId(id);
             candidateRepository.save(candidate);
         }
-        throw new CandidateNotExistsException("el usuario a editar no existe!");
-
+        else
+        {
+            throw new CandidateNotExistsException("el usuario a editar no existe!");
+        }
     }
 
     public void delete(long id)

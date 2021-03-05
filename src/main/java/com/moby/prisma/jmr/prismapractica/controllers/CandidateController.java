@@ -2,11 +2,13 @@ package com.moby.prisma.jmr.prismapractica.controllers;
 
 import com.moby.prisma.jmr.prismapractica.models.entities.Candidate;
 import com.moby.prisma.jmr.prismapractica.services.CandidateService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("candidate")
 public class CandidateController {
