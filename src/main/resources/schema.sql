@@ -19,7 +19,7 @@ CREATE TABLE technologies (
 
 CREATE TABLE technologies_by_candidate (
                                              id_technologies_by_candidate bigint NOT NULL AUTO_INCREMENT,
-                                             exp int NOT NULL,
+                                             experience int NOT NULL,
                                              id_tecnology bigint not null,
                                              id_candidate bigint not null,
                                              PRIMARY KEY (id_technologies_by_candidate),

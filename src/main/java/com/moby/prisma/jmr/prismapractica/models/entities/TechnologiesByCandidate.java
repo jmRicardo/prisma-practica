@@ -27,6 +27,8 @@ public class TechnologiesByCandidate {
     @JoinColumn(name = "id_tecnology")
     private Technology technology;
 
+    private int experience;
+
 
 
 

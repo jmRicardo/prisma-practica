@@ -35,6 +35,6 @@ public class TechnologyService {
     }
 
     public void delete(long id) {
-
+        technologyRepository.existsById(id);
     }
 }

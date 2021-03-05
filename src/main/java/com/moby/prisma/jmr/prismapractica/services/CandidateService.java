@@ -39,4 +39,8 @@ public class CandidateService {
     {
         candidateRepository.deleteById(id);
     }
+
+    public Candidate getExpByTech(long id, String name) {
+        return null;
+    }
 }

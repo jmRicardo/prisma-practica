@@ -19,4 +19,12 @@ public class TechByCandService {
     {
         return techByCandRepository.findAll();
     }
+
+    public List<TechnologiesByCandidate> getTechnologiesByCandidateAndAndTechnology_NameIsLike(long id, String name) {
+        return techByCandRepository.getTechnologiesByCandidate_IdAndTechnology_Name(id,name);
+    }
+
+    public List<TechnologiesByCandidate> getTechnologiesByCandidate(long id) {
+        return techByCandRepository.getTechnologiesByCandidate_Id(id);
+    }
 }
