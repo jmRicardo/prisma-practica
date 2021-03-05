@@ -2,10 +2,7 @@ package com.moby.prisma.jmr.prismapractica.controllers;
 
 import com.moby.prisma.jmr.prismapractica.models.entities.Technology;
 import com.moby.prisma.jmr.prismapractica.services.TechnologyService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +22,29 @@ public class TechnologyController {
         return technologyService.getAll();
     }
 
+    @GetMapping("/{id}")
+    public Technology get(@PathVariable long id)
+    {
+        return technologyService.getById(id);
+    }
+
+    @PostMapping()
+    public void add(@RequestBody Technology technology)
+    {
+        technologyService.add(technology);
+    }
+
+    @PutMapping("/{id}")
+    public void update(@RequestBody Technology technology, @PathVariable long id)
+    {
+        technology.setId(id);
+        technologyService.update(technology);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable long id)
+    {
+        technologyService.delete(id);
+    }
 
 }

@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CandidateService {
@@ -28,24 +27,12 @@ public class CandidateService {
     }
 
     public Candidate getById(long id) {
-        Optional<Candidate> byId = candidateRepository.findById(id);
-        if (byId.isPresent())
-            return byId.orElseThrow();
-        throw new EntityNotFoundException("el candidato no se encuentra en la BD");
+        return candidateRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
-    public void update(Candidate candidate,long id)
+    public void update(Candidate candidate)
     {
-        Optional<Candidate> byId = candidateRepository.findById(id);
-        if (byId.isPresent())
-        {
-            candidate.setId(id);
-            candidateRepository.save(candidate);
-        }
-        else
-        {
-            throw new EntityNotFoundException("el candidato a editar no existe!");
-        }
+        candidateRepository.save(candidateRepository.findById(candidate.getId()).orElseThrow(EntityNotFoundException::new));
     }
 
     public void delete(long id)
