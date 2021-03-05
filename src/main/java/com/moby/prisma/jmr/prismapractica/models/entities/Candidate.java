@@ -20,6 +20,7 @@ public class Candidate {
     @Column(name = "first_name")
     private String lastName;
 
+    @Enumerated(EnumType.STRING)
     private String type;
 
     private String document;
