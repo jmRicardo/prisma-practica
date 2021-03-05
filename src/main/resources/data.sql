@@ -1,1 +1,8 @@
-INSERT INTO TECHNOLOGIES(name, version) VALUES ('Java','15')
+INSERT INTO TECHNOLOGIES(name, version) VALUES ('Java','15');
+INSERT INTO TECHNOLOGIES(name, version) VALUES ('Python','3.9.2');
+INSERT INTO TECHNOLOGIES(name, version) VALUES ('Maven','4.0.0');
+INSERT INTO TECHNOLOGIES(name, version) VALUES ('Hibernate','5.4.0 final');
+INSERT INTO TECHNOLOGIES(name, version) VALUES ('Spring','2.4.2');
+
+INSERT INTO CANDIDATES(FIRST_NAME, LAST_NAME, TYPE, DOCUMENT, DATE_OF_BIRTH) VALUES ( 'Noob','Saibot', 'DNI', '800.000','12/12/1920');
+
