@@ -1,6 +1,7 @@
 package com.moby.prisma.jmr.prismapractica.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -16,7 +17,17 @@ public class TechnologiesByCandidate {
     @Column(name = "id_technologies_by_candidate")
     private long id;
 
-    private long idTechnology;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonManagedReference
+    @JoinColumn(name = "id_candidate")
+    private Candidate candidate;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonManagedReference
+    @JoinColumn(name = "id_tecnology")
+    private Technology technology;
+
+
 
 
 }
