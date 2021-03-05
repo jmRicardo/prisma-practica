@@ -1,5 +1,6 @@
 package com.moby.prisma.jmr.prismapractica.models.entities;
 
+import com.moby.prisma.jmr.prismapractica.models.DniType;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -21,8 +22,8 @@ public class Candidate {
     @Column(name = "last_name")
     private String lastName;
 
-    //@Enumerated(EnumType.STRING)
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private DniType type;
 
     private String document;
 
