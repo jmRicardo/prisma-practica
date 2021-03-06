@@ -9,7 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -20,12 +22,12 @@ import java.util.List;
 
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 
-//@RunWith(SpringRunner.class)
 @WebMvcTest(CandidateController.class)
 class CandidateControllerTest {
 
@@ -45,7 +47,7 @@ class CandidateControllerTest {
         candidateList = new ArrayList<>();
     }
 
-    //@WithMockUser(username = "boon",password = "12345678")
+
     @Test
     void getAllCandidates() throws Exception {
 
@@ -60,7 +62,7 @@ class CandidateControllerTest {
 
         when(candidateService.getAll()).thenReturn(candidateList);
 
-        mockMvc.perform(get("/candidate")).andExpect(status().isOk())
+        mockMvc.perform(get("/candidate").with(httpBasic("boon","12345678"))).andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().string(candidateListJSON));
     }

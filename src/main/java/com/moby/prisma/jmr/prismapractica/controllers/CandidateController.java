@@ -9,7 +9,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("candidate")
+@RequestMapping("/candidate")
 public class CandidateController {
 
     private final CandidateService candidateService;
