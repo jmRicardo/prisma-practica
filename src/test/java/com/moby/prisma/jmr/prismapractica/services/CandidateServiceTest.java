@@ -7,7 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -15,11 +17,7 @@ import static org.mockito.MockitoAnnotations.openMocks;
 
 class CandidateServiceTest {
 
-    private static final long ID_STOCK = 1;
-
-    private static final long ID_BRAND_MODEL = 1;
-
-    public static final long ID_BRAND = 1;
+    private static final long ID_CANDIDATE = 1;
 
     @Mock
     CandidateRepository candidateRepository;
@@ -49,10 +47,34 @@ class CandidateServiceTest {
 
     @Test
     void add() {
+
+        Candidate candidate = mock(Candidate.class);
+
+        candidateService.add(candidate);
+
+        verify(candidateRepository,times(1)).save(candidate);
     }
 
     @Test
-    void getById() {
+    void getByIdNotFound() {
+
+        when(candidateRepository.findById(ID_CANDIDATE)).thenReturn(Optional.empty());
+
+        assertThrows(EntityNotFoundException.class, () -> candidateService.getById(ID_CANDIDATE));
+    }
+
+    @Test
+    void findByIdSuccess()
+    {
+        Candidate candidate = mock(Candidate.class);
+
+        when(candidateRepository.findById(ID_CANDIDATE)).thenReturn(Optional.ofNullable(candidate));
+
+        Candidate data = candidateService.getById(ID_CANDIDATE);
+
+        verify(candidateRepository,times(1)).findById(ID_CANDIDATE);
+
+        assertEquals(candidate,data);
     }
 
     @Test
@@ -63,7 +85,4 @@ class CandidateServiceTest {
     void delete() {
     }
 
-    @Test
-    void getExpByTech() {
-    }
 }
