@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
@@ -25,6 +26,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 @WebMvcTest(CandidateController.class)
 class CandidateControllerTest {
+
+    private static final long ID_CANDIDATE = 1;
 
     @Autowired
     private MockMvc mockMvc;
@@ -40,6 +43,27 @@ class CandidateControllerTest {
     {
         openMocks(this);
         candidateList = new ArrayList<>();
+    }
+
+    @Test
+    void getById() throws Exception {
+
+        String candidateJSON = "";
+
+        Candidate candidate = new Candidate();
+        candidate.setId(ID_CANDIDATE);
+
+        try {
+            candidateJSON =  new ObjectMapper().writeValueAsString(candidate);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        when(candidateService.getById(ID_CANDIDATE)).thenReturn(candidate);
+
+        mockMvc.perform(get("/candidate/" + ID_CANDIDATE).with(httpBasic("boon","12345678"))).andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().string(candidateJSON));
     }
 
 
