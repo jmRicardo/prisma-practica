@@ -1,5 +1,6 @@
 package com.moby.prisma.jmr.prismapractica.services;
 
+import com.moby.prisma.jmr.prismapractica.exceptions.GlobalServiceDataAccessException;
 import com.moby.prisma.jmr.prismapractica.models.entities.Candidate;
 import com.moby.prisma.jmr.prismapractica.repositories.CandidateRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,6 +33,47 @@ class CandidateServiceTest {
     void setUp() {
         openMocks(this);
     }
+
+
+    @Test
+    void updateThrowEntityNotFound() {
+
+        Candidate candidate = mock(Candidate.class);
+
+        when(candidateRepository.save(candidate)).thenThrow(EntityNotFoundException.class);
+
+        assertThrows(EntityNotFoundException.class, () -> candidateService.update(candidate));
+    }
+
+    @Test
+    void updateSuccess() {
+
+/*        Candidate candidate = mock(Candidate.class);
+        Candidate candidate2 = mock(Candidate.class);
+
+        when(candidateRepository.findById(ID_CANDIDATE)).thenReturn(Optional.ofNullable(candidate2));
+
+        candidateService.update(candidate);
+
+        verify(candidateRepository,times(1)).save(candidate);*/
+    }
+
+    @Test
+    void delete() {
+
+        Candidate candidateDB = mock(Candidate.class);
+
+        Candidate candidateUdpdate = mock(Candidate.class);
+
+        when(candidateRepository.findById(ID_CANDIDATE)).thenReturn(Optional.ofNullable(candidateDB));
+    }
+
+
+    @Test
+    void deleteError() {
+
+    }
+
 
     @Test
     void getAll() {
@@ -75,14 +117,6 @@ class CandidateServiceTest {
         verify(candidateRepository,times(1)).findById(ID_CANDIDATE);
 
         assertEquals(candidate,data);
-    }
-
-    @Test
-    void update() {
-    }
-
-    @Test
-    void delete() {
     }
 
 }
