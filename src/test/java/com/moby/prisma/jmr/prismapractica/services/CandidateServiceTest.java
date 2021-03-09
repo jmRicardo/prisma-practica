@@ -1,6 +1,5 @@
 package com.moby.prisma.jmr.prismapractica.services;
 
-import com.moby.prisma.jmr.prismapractica.exceptions.GlobalServiceDataAccessException;
 import com.moby.prisma.jmr.prismapractica.models.entities.Candidate;
 import com.moby.prisma.jmr.prismapractica.repositories.CandidateRepository;
 import org.junit.jupiter.api.BeforeEach;
