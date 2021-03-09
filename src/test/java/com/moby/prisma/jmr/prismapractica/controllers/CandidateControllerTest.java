@@ -12,8 +12,12 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -28,6 +32,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 class CandidateControllerTest {
 
     private static final long ID_CANDIDATE = 1;
+
+    private static final ObjectMapper objectMapper = new ObjectMapper();
 
     @Autowired
     private MockMvc mockMvc;
@@ -46,18 +52,27 @@ class CandidateControllerTest {
     }
 
     @Test
-    void getById() throws Exception {
+    void getByIdNotFound() throws Exception {
+
+        when(candidateService.getById(ID_CANDIDATE)).thenThrow(EntityNotFoundException.class);
+
+        String response = "{\"message\":\"Entidad no encontrada! no existe en la BD\"}";
+
+        mockMvc.perform(get("/candidate/" + ID_CANDIDATE).with(httpBasic("boon","12345678")))
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().string(response));
+    }
+
+    @Test
+    void getByIdSuccess() throws Exception {
 
         String candidateJSON = "";
 
         Candidate candidate = new Candidate();
         candidate.setId(ID_CANDIDATE);
 
-        try {
-            candidateJSON =  new ObjectMapper().writeValueAsString(candidate);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+        candidateJSON =  objectMapper.writeValueAsString(candidate);
 
         when(candidateService.getById(ID_CANDIDATE)).thenReturn(candidate);
 
@@ -73,11 +88,7 @@ class CandidateControllerTest {
         candidateList.add(new Candidate());
         String candidateListJSON = "";
 
-        try {
-            candidateListJSON =  new ObjectMapper().writeValueAsString(candidateList);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+        candidateListJSON =  objectMapper.writeValueAsString(candidateList);
 
         when(candidateService.getAll()).thenReturn(candidateList);
 
